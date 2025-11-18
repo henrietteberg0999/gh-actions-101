@@ -1,5 +1,6 @@
 name: My first Github workflow
 run-name: First workflow # Optional
+permission: {}
 
 # Events triggering workflow
 on: [push]
@@ -15,6 +16,8 @@ jobs:
   run-code: 
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v5
 
