@@ -31,6 +31,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Extra step for Python 3.14
+        if: ${{ matrix.python-version == '3.14' }}
+        run: echo "Extra step for Python 3.14"
+
       - run: python mycode.py
 
       - name: Install test depencies
