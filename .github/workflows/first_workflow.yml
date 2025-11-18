@@ -13,7 +13,17 @@ jobs:
     steps:
       - run: echo "Hello world"
 
-  run-code: 
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Run checks
+        run: |
+          echo "Run checks"
+          sleep 20
+
+  run-code:
+    needs: checks
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     permissions:
