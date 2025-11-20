@@ -1,60 +1,12 @@
-name: My first Github workflow
+name: My first GitHub workflow
 run-name: First workflow # Optional
-permissions: {}
 
-# Events triggering workflow
-on: 
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# Events triggering the workflow
+on: [push]
 
-# Group of jobs to run as part of the workflow
+# Group of jobs to run as poart of the workflow
 jobs:
   greet:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
       - run: echo "Hello world"
-
-  checks:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Run checks
-        run: |
-          echo "Run checks"
-          sleep 20
-
-  run-code:
-    needs: checks
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    
-    strategy:
-      matrix:
-        python-version: [ "3.12", "3.13", "3.14" ]
-        os: [ "ubuntu-latest", "windows-latest", "macos-latest" ]
-
-    steps:
-      - uses: actions/checkout@v5
-
-      - uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Extra step for Python 3.14
-        if: ${{ matrix.python-version == '3.14' }}
-        run: echo "Extra step for Python 3.14"
-
-      - run: python mycode.py
-
-      - name: Install test depencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements-dev.txt
-
-      - name: Run tests
-        run: pytest
