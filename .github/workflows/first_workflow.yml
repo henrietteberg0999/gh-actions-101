@@ -19,7 +19,14 @@ jobs:
     timeout-minutes: 5
     permissions:
         contents: read
+    strategy:
+      matrix:
+        python-version: [ "3.12", "3.13", "3.14" ]
     steps:
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          
       - uses: actions/checkout@v5
 
       - uses: actions/setup-python@v6
