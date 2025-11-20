@@ -1,5 +1,6 @@
 name: My first GitHub workflow
 run-name: First workflow # Optional
+permissions: {}
 
 # Events triggering the workflow
 on: [push]
@@ -9,6 +10,8 @@ jobs:
   greet:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+        contents: read
     steps:
       - run: echo "Hello world"
 
