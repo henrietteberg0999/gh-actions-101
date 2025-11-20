@@ -22,4 +22,4 @@ jobs:
         with:
           python-version: '3.14'
 
-      - run: python code.py
+      - run: python mycode.py
